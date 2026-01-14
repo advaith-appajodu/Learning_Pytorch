@@ -2,6 +2,9 @@
 
 Notes Of what I've learned:
 
+Day 1:
+Was just practice for the tools and not much tinkering so I didn't build much ML intuition
+
 
 Day 2:
 
@@ -13,8 +16,15 @@ Learning rate for SGD seems best at 0.001 or 0.0001 as 0.01 and 0.1 is a faster 
 
 Changing Optimizers to Adam increases learning exponentially. Seems to be a better optimizer so far. Accuracy doesn't seem to regress at higher epochs but rather stabilize at 87.9%
 
-Someone Suggested adding dropout, so i added a dropout of 0.3 and increased the dimensions of each matrix while decreasing the depth. I also reduced learning rate for Adam based on that friend's suggestion. Maybe Epochs follow the same trend as I am seeing within each epoch where there is a temporary increase in loss but the overall trend is downward. so I am also going to try and train for 30 epochs to test.
+Someone Suggested adding dropout, so i added a dropout of 0.3 and increased the dimensions of each matrix while decreasing the depth. I also reduced learning rate for Adam based on that friend's suggestion I am also going to try and train for 30 epochs cause law of large numbers.
 
 At 30 epochs, there was an overall increase to 89.9% with occasional decreases and platues.
 
 I'm going to add weight decay, which limits the model from relying too much on one feature but that works against Adam, which gives table weights larger updates, so I'm going to switch to AdamW which accomodates this.
+
+Still can't break 90% so I'm going to try and add Batch Normalization layers.
+
+Finaly broke to 90.4%, which is consistent when I replicate it. Reached my goal for the day and learned more than I planned.
+Started at 6.4% accuracy and ended the day with 90.4%
+
+Day 3:
