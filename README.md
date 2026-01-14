@@ -18,7 +18,7 @@ Learning rate for SGD seems best at 0.001 or 0.0001 as 0.01 and 0.1 is a faster 
 
 Changing Optimizers to Adam increases learning exponentially. Seems to be a better optimizer so far. Accuracy doesn't seem to regress at higher epochs but rather stabilize at 87.9%
 
-Someone Suggested adding dropout, so i added a dropout of 0.3 and increased the dimensions of each matrix while decreasing the depth. I also reduced learning rate for Adam based on that friend's suggestion I am also going to try and train for 30 epochs cause law of large numbers.
+Added a dropout of 0.3 and increased the dimensions of each matrix while decreasing the depth. I also reduced learning rate for Adam because it's supposed to stop fluctuation of loss I am also going to try and train for 30 epochs cause law of large numbers.
 
 At 30 epochs, there was an overall increase to 89.9% with occasional decreases and platues.
 
