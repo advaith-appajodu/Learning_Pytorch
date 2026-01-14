@@ -1,5 +1,5 @@
 # Learning_Pytorch
-
+Haven't built anything in a while and I thought my PyTorch was rusty so I'm documenting my review and building something new.
 Notes Of what I've learned:
 
 Day 1:
