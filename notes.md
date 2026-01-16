@@ -61,8 +61,7 @@ Since the loss seems to be very jumpy, there's a chance that the learning rate i
 
 So final idea of the night: Data Augmentation. I wanted to save data cleaning and manipulation for future projects but it seems like I can't get to my goal without it, so I am going to incorporate random crop and rotate in my traning set to introduce diversity in the images. OH MY GOD. Finally. The Accuracy for both sets is stably increasing and the Loss is stably decreasing. So after 225 epochs, I ended with Train Epoch: Avg Loss: 0.3882, Accuracy: 86.47% Test: Avg Loss: 0.5155, Accuracy: 82.41%. The loss is within my acceptable range and my accuracy is pretty close to each other, so I know I solved the overfitting issue, but I can't seem to push the model further. I think I need more advanced techniques to create a more powerful CNN or add more dimensions, but I think this toy exercise taught me a lot more than I thought I was going to learn, so I'm going to put a pause on this for now and branch to multi headed attention transformers tomorrow.
 
-Forgot to use WandB, will do it next time. Final Graph:
-<img width="515" height="307" alt="image" src="https://github.com/user-attachments/assets/127e1c6e-a6c6-448a-b83d-7ed30fc50e90" />
+Forgot to use WandB to graph loss. Bad Practice. Will start doing it tomorrow. Easier to track overtraining
 
 
 
