@@ -65,3 +65,35 @@ Forgot to use WandB to graph loss. Bad Practice. Will start doing it tomorrow. E
 
 
 
+Day 4:
+ Starting today by following the pytorch documentation and building a simple transformer. End goal is to make an english to telugu translator.
+
+Found and english telugu pair dataset on huggingface with a an instruction and a conversation table which don't seem useful to me right now, so I'm not going to use those.
+
+Initialized WandB and spent way too long trying to configure it to track the loss, epochs, and step.
+
+I'm first going to write the training and evaluation loop and make sure it all works and tracks well. Then, I'll add accuracy, which probably isn't as simple as a CNN correct or not approach. 
+
+So over 20 epochs the loss consistently decreases and is pretty stable, so I think I can increase the training time and introduce a new evaluation metric to measure. After some research, BLEU seems to be the best metric for now. BLEU measures token matches and penalizes models from shortening sentences to have more matches. The problem here is that Telugu is a much more different language than latin based ones, so standard tokenizers are going to fail at properly splitting sentences to capture meaning.
+
+Found a tokenizer that is specific to indic languages, which should help this problem.
+Setting up this BLEU score calculator is way harder then expected. It keeps flaggin random errors so I have to read through the API documentation to understand how it works.
+
+Set up a traning loop for 20 epochs with Bleu. Loss is decreasing steadily per batch and per epoch, but Bleu spiked twice then collapsed to 2.7 for the later 10 epochs and I'm not sure why. I will link the WandB graphs later so the graphs are viewable for you guys. I think the model is learning, but either the way I'm calculating Bleu is wrong, or this parameter is the wrong one to measure. Since most tools are built around Latin based languages, using it for Indic languages might be an inherent flaw and not something I could work around.
+
+One possible solution is changing to Coprus Bleu, which calcuates a BLEU score for the whole batch instead of individual sentences, giving a more accurate and stable representation of that batch's performance. 
+
+I figured out that I wasn't properly truncating the MT at the <eos> token, so I'll make adjustments to that and then smooth out the bleu scores so that there are less functional penalties. If any of the n-grams are 0, then bleu calculates an automatic 0 for that sentence, which smoothing reduces. This probably isn't related to the issue I'm facing, but I read that it's good practice, so I'm going to go ahead and implement it since I'm rewriting the eval function.
+
+Ok now the first epoch train smoothly but it's been stuck for 4+ minutes which might be expected because the model is translating an entire test batch, or it might be a problem with the way I'm calculating BLEU. Nevermind, it just takes a while for BLEU to be calculated. I was scared it was broken again.
+
+BLEU shot down in the second epoch and loss shot up. I'm going to let it train for a few more epochs so I can see a trend. Great decision past me. That was a temporary spike, but after there was a consistent increase in BLEU score and decrease in loss. The normal training length for a transformer of my size and use is ~80 epochs according to ChatGPT, so I'll start there. This might be the smoothest training data I've ever built. After epoch 30, the loss marginally decreases and BLEU barely increases, so I'm going to end training early before 80 epochs, but the exact epoch depends on the data. Terminated training at epoch 49.
+
+So after having ChatGPT inspect my code and my result it raised some interesting points that I'm going to share. The training techinque I used is called teacher forced learning, where instead of having access to the last token the transformer generated, it has access to the correct token in that place so that the sentence doesn't get derailed. The other way to do so is called autoregressive learning where the last generated output is passed in as input. For from-scratch models, teacher forced training is good because it allows for the model to understand the language, but can't generate it's own full sentences because it is always trained on the correct initial word. To counteract this, you then do autoregressive training so the model can independantly generate full sentences without getting derailed.
+
+This is now a two part project. The only change I need to make for round two is the input for the model is the last output. Same setup and observation.
+
+Astute observation. I was using a <sos> token when <eos> was needed, which caused the model to get confused. Autoregressive training will deifnetely help but I don't have enough compute since one epoch took 46 minutes on an A100 and the translation now works great now that I fixed that mistake. Call me Mr. Transformer.
+
+The next project I'm thinking of has an immense jump in difficulty, so it's probably going to be a long term project instead of one that lasts 1-2 days. I was thinking of making a Vision model that has live feed and can detect specific symbols I make with my hands. Then I can use these symbols as a password to unlock a special app or as a shortcut, but the gyst is a vision model that can interpret hand signals.
+ 
