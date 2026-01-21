@@ -95,5 +95,7 @@ So after having ChatGPT inspect my code and my result it raised some interesting
 
 Found a mistake. I was using a <sos> token when <eos> was needed, which caused the model to get confused and halucinate the endings. Autoregressive training will deifnetely help but I don't have enough compute since one epoch took 46 minutes on an A100 and the translation now works great now that I fixed that mistake. Call me Mr. Transformer.
 
+Model weights file is too large to upload to GitHub, so if you want to try out my transformer just message me.
+
 The next project I'm thinking of has an immense jump in difficulty, so it's probably going to be a long term project instead of one that lasts 1-2 days. I was thinking of making a Vision model that has live feed and can detect specific symbols I make with my hands. Then I can use these symbols as a password to unlock a special app or as a shortcut, but the gyst is a vision model that can interpret hand signals.
  
